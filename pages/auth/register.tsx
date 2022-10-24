@@ -13,8 +13,9 @@ const Register: NextPage = () => {
               <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">start your 14-day free trial</a>
             </p>
           </div>
-
-          <RegisterForm name='Arash Hp' />
+          
+          {/* if wanna sed props for RegisterFormProps => name='Arash Hp'  */}
+          <RegisterForm />
 
         </div>
       </div>

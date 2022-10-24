@@ -1,5 +1,6 @@
 import { FormikProps, Form, withFormik } from 'formik'
 import { Input } from '../components/form/Input'
+import * as yup from "yup"
 
 interface RegisterFormValues {
     name: string,
@@ -39,19 +40,25 @@ const innerRegisterForm = (props: FormikProps<RegisterFormValues>) => {
     )
 }
 
+//this type just for get props 
 interface RegisterFormProps {
-    name?:string,
+    name?: string,
 
 }
 
+const registerFormValidationSchema = yup.object().shape({
+    name: yup.string().required().min(4),
+    email: yup.string().required().email(),
+    password: yup.string().required().min(8)
+})
+
 const RegisterForm = withFormik<RegisterFormProps, RegisterFormValues>({
-    mapPropsToValues: props => {
-        return {
-            name: props.name ?? '',
-            email: '',
-            password: '',
-        }
-    },
+    mapPropsToValues: props => ({
+        name: props.name ?? '',  //if wanna get name from props
+        email: '',
+        password: '',
+    }),
+    validationSchema: registerFormValidationSchema,
     handleSubmit: (values) => {
         console.log(values)
     }

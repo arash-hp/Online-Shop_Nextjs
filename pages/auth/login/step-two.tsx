@@ -1,9 +1,25 @@
 import type { NextPage } from 'next';
+import Router from 'next/router';
+import { useEffect } from 'react';
 import { useCookies } from 'react-cookie';
 import PhoneVerifyFormyForm from '../../../app/auth/PhoneVerifyForm';
 import RegisterForm from '../../../app/auth/RegisterForm';
+import { useAppSelector } from '../../../app/hooks';
+import { selecetPhoneVerifyToken } from '../../../app/store/auth';
 
-const Login: NextPage = () => {
+const PhoneVerify: NextPage = () => {
+
+  const token = useAppSelector(selecetPhoneVerifyToken);
+
+
+  useEffect(() => {
+    if (token === undefined) {
+      Router.push('/auth/login')
+      console.log('token')
+
+    }
+  }, [token])
+  console.log(token)
 
   return (
     <>
@@ -23,4 +39,4 @@ const Login: NextPage = () => {
   )
 }
 
-export default Login
+export default PhoneVerify

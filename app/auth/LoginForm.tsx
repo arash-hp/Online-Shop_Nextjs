@@ -5,7 +5,7 @@ import { LoginFormValuesInterface } from '../contracts/auth'
 import { innerLoginForm } from '../components/form/innerLoginForm'
 import { callApi } from '../helper/callApi'
 import { validationError } from '../helper/validationErrors'
-import  Router  from 'next/router'
+import Router from 'next/router'
 
 const phoneRegExp = /^(0|0098|\+98)9(0[1-5]|[1 3]\d|2[0-2]|98)\d{7}$/
 
@@ -15,7 +15,7 @@ const loginFormValidationSchema = yup.object().shape({
 
 //this type just for get props 
 interface LoginFormProps {
-    setCookie: any
+    setToken: (token: string) => void
 }
 
 const LoginForm = withFormik<LoginFormProps, LoginFormValuesInterface>({
@@ -27,7 +27,7 @@ const LoginForm = withFormik<LoginFormProps, LoginFormValuesInterface>({
         try {
             const response = await callApi().post('auth/login', values);
             if (response.status == 200) {
-                localStorage.setItem('phone-verify-token',response.data.token)
+                props.setToken(response.data.token)
                 Router.push('/auth/login/step-two')
                 // props.setCookie('user-token', response.data.token, {
                 //     'maxAge': 3600 * 24 * 30,

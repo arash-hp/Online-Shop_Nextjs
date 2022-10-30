@@ -9,12 +9,11 @@ import  Router  from 'next/router'
 
 
 const verifyFormValidationSchema = yup.object().shape({
-    code : yup.string().required().matches(/^[0-9]+$/,"فقط میتوانید عدد وارد کنید").length(6)
+    code : yup.string().required().matches(/^[0-9]+$/," ید").length(6)
 })
 
 //this type just for get props 
 interface VerifyFormProps {
-    setCookie: any
 }
 
 const PhoneVerifyForm = withFormik<VerifyFormProps, PhoneVerifyFormValuesInterface>({

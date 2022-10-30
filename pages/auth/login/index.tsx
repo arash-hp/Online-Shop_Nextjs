@@ -2,9 +2,15 @@ import type { NextPage } from 'next';
 import { useCookies } from 'react-cookie';
 import LoginForm from '../../../app/auth/LoginForm';
 import RegisterForm from '../../../app/auth/RegisterForm';
+import { useAppDispatch } from '../../../app/hooks';
+import { updatePhoneVerifyToken } from '../../../app/store/auth';
 
 const Login: NextPage = () => {
-  const [cookie,setCookie] = useCookies( ['user-token']) 
+
+const dispatch = useAppDispatch();
+const setPhoneVerifyToken = (token:string)=>{
+  dispatch(updatePhoneVerifyToken(token))
+}
 
   return (
     <>
@@ -17,7 +23,7 @@ const Login: NextPage = () => {
               <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">start your 14-day free trial</a>
             </p>
           </div>
-          <LoginForm setCookie={setCookie} />
+          <LoginForm setToken = {setPhoneVerifyToken} />
 
         </div>
       </div>

@@ -11,12 +11,8 @@ export const innerRegisterForm = (props: FormikProps<RegisterFormValuesInterface
                 </div>
 
                 <div>
-                    <Input name="email" label='Email' type='email' />
+                    <Input name="phone" label='phone' />
 
-                </div>
-
-                <div>
-                    <Input name="password" label='Password' type='password' />
                 </div>
             </div>
 

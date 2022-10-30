@@ -1,7 +1,7 @@
 import type { NextPage } from 'next';
 import { useCookies } from 'react-cookie';
-import LoginForm from '../../app/auth/LoginForm';
-import RegisterForm from '../../app/auth/RegisterForm';
+import LoginForm from '../../../app/auth/LoginForm';
+import RegisterForm from '../../../app/auth/RegisterForm';
 
 const Login: NextPage = () => {
   const [cookie,setCookie] = useCookies( ['user-token']) 

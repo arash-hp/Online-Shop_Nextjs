@@ -1,13 +1,13 @@
 import { Form, FormikProps } from "formik"
-import { LoginFormValuesInterface } from "../../contracts/auth"
+import { PhoneVerifyFormValuesInterface } from "../../contracts/auth"
 import { Input } from "./Input"
 
-export const innerLoginForm = (props: FormikProps<LoginFormValuesInterface>) => {
+export const innerPhoneVerifyForm = (props: FormikProps<PhoneVerifyFormValuesInterface>) => {
     return (
         <Form className="mt-8 space-y-6">
             <div className="-space-y-px rounded-md shadow-sm">
                 <div>
-                    <Input name="phone" label='phone' />
+                    <Input name="code" label='code' />
                 </div>
             </div>
 

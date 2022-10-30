@@ -1,28 +1,28 @@
 import { FormikProps, Form, withFormik } from 'formik'
 import { Input } from '../components/form/Input'
 import * as yup from "yup"
-import { LoginFormValuesInterface } from '../contracts/auth'
-import { innerLoginForm } from '../components/form/innerLoginForm'
+import { PhoneVerifyFormValuesInterface } from '../contracts/auth'
+import { innerPhoneVerifyForm } from '../components/form/phoneVerifyLoginForm'
 import { callApi } from '../helper/callApi'
 import { validationError } from '../helper/validationErrors'
 import  Router  from 'next/router'
 
-const phoneRegExp = /^(0|0098|\+98)9(0[1-5]|[1 3]\d|2[0-2]|98)\d{7}$/
 
-const loginFormValidationSchema = yup.object().shape({
-    phone: yup.string().required().matches(phoneRegExp, 'the phone format is not correct')
+const verifyFormValidationSchema = yup.object().shape({
+    code : yup.string().required().matches(/^[0-9]+$/,"فقط میتوانید عدد وارد کنید").length(6)
 })
 
 //this type just for get props 
-interface LoginFormProps {
+interface VerifyFormProps {
     setCookie: any
 }
 
-const LoginForm = withFormik<LoginFormProps, LoginFormValuesInterface>({
+const PhoneVerifyForm = withFormik<VerifyFormProps, PhoneVerifyFormValuesInterface>({
     mapPropsToValues: props => ({
-        phone: '',
+        code: '',
+        token:''
     }),
-    validationSchema: loginFormValidationSchema,
+    validationSchema: verifyFormValidationSchema,
     handleSubmit: async (values, { props, setFieldError }) => {
         try {
             const response = await callApi().post('auth/login', values);
@@ -42,6 +42,6 @@ const LoginForm = withFormik<LoginFormProps, LoginFormValuesInterface>({
 
         }
     }
-})(innerLoginForm)
+})(innerPhoneVerifyForm)
 
-export default LoginForm; 
+export default PhoneVerifyForm

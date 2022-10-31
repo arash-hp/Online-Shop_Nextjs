@@ -1,9 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from ".";
+import { string } from "yup";
 
 interface AuthState {
-    phoneVerifyToken? : string
+    phoneVerifyToken?: string;
 }
 
 const initialState = {
@@ -14,7 +15,7 @@ export const authSlice = createSlice({
     name: 'auth',
     initialState,
     reducers: {
-        updatePhoneVerifyToken: (state, action: PayloadAction<string>) => {
+        updatePhoneVerifyToken: (state, action: PayloadAction<string | undefined>) => {
             state.phoneVerifyToken = action.payload;
         }
     }

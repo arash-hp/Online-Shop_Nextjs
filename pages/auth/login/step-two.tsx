@@ -4,15 +4,24 @@ import { useEffect } from 'react';
 import { useCookies } from 'react-cookie';
 import PhoneVerifyFormyForm from '../../../app/auth/PhoneVerifyForm';
 import RegisterForm from '../../../app/auth/RegisterForm';
-import { useAppSelector } from '../../../app/hooks';
-import { selecetPhoneVerifyToken } from '../../../app/store/auth';
+import { useAppDispatch, useAppSelector } from '../../../app/hooks';
+import { selecetPhoneVerifyToken, updatePhoneVerifyToken } from '../../../app/store/auth';
 
 const PhoneVerify: NextPage = () => {
 
+  const dispatch = useAppDispatch()
   const token = useAppSelector(selecetPhoneVerifyToken);
 
+  const clearPhoneVerifyToken = () => {
+    dispatch(updatePhoneVerifyToken(undefined))
+  }
 
   useEffect(() => {
+    Router.beforePopState(({ url, as, options }) => {
+      clearPhoneVerifyToken()
+      return true
+    })
+
     if (token === undefined) {
       Router.push('/auth/login')
       console.log('token')
@@ -32,7 +41,7 @@ const PhoneVerify: NextPage = () => {
               <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">start your 14-day free trial</a>
             </p>
           </div>
-          <PhoneVerifyFormyForm />
+          <PhoneVerifyFormyForm token={token} clearToken={clearPhoneVerifyToken} />
         </div>
       </div>
     </>

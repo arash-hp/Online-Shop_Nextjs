@@ -6,6 +6,7 @@ import { innerPhoneVerifyForm } from '../components/form/phoneVerifyLoginForm'
 import { callApi } from '../helper/callApi'
 import { validationError } from '../helper/validationErrors'
 import Router from 'next/router'
+import { storeLoginToken } from '../helper/auth'
 
 
 const verifyFormValidationSchema = yup.object().shape({
@@ -28,10 +29,10 @@ const PhoneVerifyForm = withFormik<PhoneVerifyFormProps, PhoneVerifyFormValuesIn
         try {
             const response = await callApi().post('auth/login/verify-phone', values);
             if (response.status == 200) {
-                if (response.status == 200) {
-                  await  Router.push('/')
-                    props.clearToken()
-                }
+                storeLoginToken(response.data?.user?.token)
+                await Router.push('/panel')
+                props.clearToken()
+
             }
         } catch (error) {
             if (error instanceof validationError) {

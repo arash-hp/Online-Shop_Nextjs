@@ -2,15 +2,17 @@ import type { NextPage } from 'next';
 import { useCookies } from 'react-cookie';
 import LoginForm from '../../../app/auth/LoginForm';
 import RegisterForm from '../../../app/auth/RegisterForm';
+import GuestPanelLayout from '../../../app/components/guestPanelLayout';
 import { useAppDispatch } from '../../../app/hooks';
 import { updatePhoneVerifyToken } from '../../../app/store/auth';
+import { NextPageWithLayout } from '../../_app';
 
-const Login: NextPage = () => {
+const Login: NextPageWithLayout = () => {
 
-const dispatch = useAppDispatch();
-const setPhoneVerifyToken = (token:string)=>{
-  dispatch(updatePhoneVerifyToken(token))
-}
+  const dispatch = useAppDispatch();
+  const setPhoneVerifyToken = (token: string) => {
+    dispatch(updatePhoneVerifyToken(token))
+  }
 
   return (
     <>
@@ -23,7 +25,7 @@ const setPhoneVerifyToken = (token:string)=>{
               <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">start your 14-day free trial</a>
             </p>
           </div>
-          <LoginForm setToken = {setPhoneVerifyToken} />
+          <LoginForm setToken={setPhoneVerifyToken} />
 
         </div>
       </div>
@@ -31,4 +33,5 @@ const setPhoneVerifyToken = (token:string)=>{
   )
 }
 
+Login.getLayout = page => <GuestPanelLayout>{page}</GuestPanelLayout>
 export default Login

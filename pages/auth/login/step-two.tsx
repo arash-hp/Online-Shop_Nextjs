@@ -4,10 +4,12 @@ import { useEffect } from 'react';
 import { useCookies } from 'react-cookie';
 import PhoneVerifyFormyForm from '../../../app/auth/PhoneVerifyForm';
 import RegisterForm from '../../../app/auth/RegisterForm';
+import GuestPanelLayout from '../../../app/components/guestPanelLayout';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import { selecetPhoneVerifyToken, updatePhoneVerifyToken } from '../../../app/store/auth';
+import { NextPageWithLayout } from '../../_app';
 
-const PhoneVerify: NextPage = () => {
+const PhoneVerify:NextPageWithLayout = () => {
 
   const dispatch = useAppDispatch()
   const token = useAppSelector(selecetPhoneVerifyToken);
@@ -20,7 +22,7 @@ const PhoneVerify: NextPage = () => {
     Router.beforePopState(({ url, as, options }) => {
       clearPhoneVerifyToken()
       return true
-    })
+    })  
 
     if (token === undefined) {
       Router.push('/auth/login')
@@ -47,5 +49,8 @@ const PhoneVerify: NextPage = () => {
     </>
   )
 }
+
+PhoneVerify.getLayout = page => <GuestPanelLayout>{page}</GuestPanelLayout>
+
 
 export default PhoneVerify

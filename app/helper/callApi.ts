@@ -10,7 +10,7 @@ export const callApi = ()=>{
         (config) => {
             return config;
         },
-        err  => Promise.reject(err)
+        err  => {throw err}
     )
 
     
@@ -26,7 +26,7 @@ export const callApi = ()=>{
                 }
             }
             
-            Promise.reject(err)
+            throw err
         }
     )
 

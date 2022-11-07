@@ -15,7 +15,16 @@ const storeLoginToken = async (token: string, days: number = 10) => {
     // })
 }
 
-const removeLoginToken = () => {
+const removeLoginToken = async () => {
+    //For clear token when saved without httpOnly
+    // const cookie = new Cookies();
+    // cookie.remove('shope_token')
+    await fetch('/api/logout', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    })
 
 }
 

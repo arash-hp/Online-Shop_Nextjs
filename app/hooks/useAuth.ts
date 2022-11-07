@@ -6,11 +6,7 @@ const useAuth = () => {
     const cookie = new Cookies()
 
     const { data, error } = useSWR('user_me', () => {
-        return callApi().get('/user', {
-            headers: {
-                authorization: cookie.get('shope_token')
-            }
-        })
+        return callApi().get('/user')
     })
 
     console.log(data)

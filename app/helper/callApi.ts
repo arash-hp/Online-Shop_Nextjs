@@ -1,31 +1,32 @@
 import axios from 'axios'
 import { validationError } from './validationErrors';
 
-export const callApi = ()=>{
+export const callApi = () => {
     const axiosInstance = axios.create({
-        baseURL : 'http://localhost:5000/api'
+        baseURL: 'http://localhost:5000/api'
     })
 
     axiosInstance.interceptors.request.use(
         (config) => {
+            config.withCredentials = true;
             return config;
         },
-        err  => {throw err}
+        err => { throw err }
     )
 
-    
+
     axiosInstance.interceptors.response.use(
         (response) => {
             return response;
         },
-        err  => {
+        err => {
             const response = err?.response
-            if(response){
-                if(response.status== 422){
+            if (response) {
+                if (response.status == 422) {
                     throw new validationError(response.data.errors)
                 }
             }
-            
+
             throw err
         }
     )

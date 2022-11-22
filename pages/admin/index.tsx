@@ -1,7 +1,4 @@
-import { useEffect } from "react";
-import { useState } from "react";
 import AdminPanelLayout from "../../app/components/adminPanelLayout";
-import UserPanelLayout from "../../app/components/userPanelLayout";
 import { NextPageWithLayout } from "../_app";
 
 const AdminPanel : NextPageWithLayout = () => {

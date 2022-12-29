@@ -1,9 +1,51 @@
 import AdminPanelLayout from "../../../app/components/adminPanelLayout";
 import { NextPageWithLayout } from "../../_app";
+import { Children, useState } from "react";
+import Modal from "../../../app/components/shared/modal";
 
 const ProductList: NextPageWithLayout = () => {
+  let [isOpen, setIsOpen] = useState(true);
+
   return (
     <div>
+      <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
+        <div>
+          <div className="relative w-full h-full max-w-2xl md:h-auto">
+            {/* <!-- Modal content --> */}
+            <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
+              {/* <!-- Modal body --> */}
+              <div className="p-6 space-y-6 text-left">
+                <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+                  Hellloooooooo
+                </p>
+                <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+                  chetoriiii
+                </p>
+              </div>
+              {/* <!-- Modal footer --> */}
+              <div className="flex justify-around p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
+                <button
+                  onClick={() => setIsOpen(false)}
+                  data-modal-toggle="defaultModal"
+                  type="button"
+                  className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                >
+                  I accept
+                </button>
+                <button
+                  onClick={() => setIsOpen(false)}
+                  data-modal-toggle="defaultModal"
+                  type="button"
+                  className="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
+                >
+                  Decline
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </Modal>
+
       <div className="flex justify-between">
         <h1>Product`s Page</h1>
         <button
